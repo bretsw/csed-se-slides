@@ -1,0 +1,1035 @@
+---
+title: "CS Educators Stack Exchange: Exploring User Interactions"
+author: "Sukanya Moudgalya & K. Bret Staudt Willet"
+date: "12/11/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+usethis::use_git_ignore(c("*.csv", "*.rds"))
+knitr::opts_chunk$set(include=TRUE, echo=TRUE, message=FALSE)
+```
+
+# Introduction
+
+The Stack Exchange Network is one of the largest question-and-answer platforms in the world, founded in 2009 and boasting over 100 million unique monthly visitors by 2015. It has many subject-specific forums for coding related topics, Mathematics, Engineering, Photography, etc. The SE network has 133 different sites as of October 2018. More recently, Stack Exchange has recently opened up discussion forums for Math  educators (2013) and Computer Science educators (2017) as well. For this project, we will focus on the users of the discussion forum [Computer Science Educators Stack Exchange](https://cseducators.stackexchange.com/) (CSEd SE). The description of the forum calls it "A question and answer site for those involved in the field of teaching Computer Science." 
+
+In this forum, registered users can ask questions on a wide range of topics related to Computer Science (CS) education. Once they ask a question, they can assign it 'tags', so that similar groups of questions can be identified by a common theme or idea. Some tags that are currently present on the forum include 'curriculum design, student motivation, algorithm' etc. Users can also reply to (i.e., answer) questions posed by other users, comment on both questions and answers, upvote and downvote questions and answers, and so on through the voting mechanism, users are held accountable to what they post on the forum. The content on the forum is thus regulated by the forum users and members to a large extent. 
+
+In addition to 'normal' user regulation, a set of registered users also act as 'moderators' or 'editors'. Editors can edit the text of what other people post. Moderators, on the other hand, have more power. They can follow up with posts that are flagged as spam or offensive, delete and manage other users, combine or collapse tags, lock posts so that no one can change them or vote on them, and so on [(read more here)](https://stackoverflow.blog/2009/05/18/a-theory-of-moderation/). 
+
+The users on this forum range from actual K-12 and college-level CS educators to working professionals in the software industry, students, and other people interested in CS education. The users also belong to many different countries, such as the USA, UK, Canada, Ireland, India, Finland, etc. Each user has [reputation points](https://meta.stackexchange.com/questions/7237/how-does-reputation-work) primarily based on the quality of their posts, such as user-generated votes their posts receive. The reputation changes across time are accessible for people to see. 
+
+# Purpose
+
+This study explores the kinds of interaction between the users, with a focus on the top voted questions. It seeks to describe the kind of users, based on their profession, location, reputation, etc., that tend to ask questions or respond to the top questions. It also seeks to understand if the users tend to cluster around certain question tags (topic area) or if the clusters are agnostic to the topics and user characteristics.
+
+In the second part of the study, we will focus on trying to interpret the reasons for users choosing to answer the questions. It will explore if the reasons are dependent to the topic tag or some characteristic of the users who ask the question. 
+
+# Theoretical Framework and Research Questions
+
+In the US, many K-12 CS teachers are isolated as the only CS educators in their schools. They are often referred to as 'singletons'. This isolation greatly impacts the opportunities of subject-specific peer-learning that these CS teachers might need (Yadav, Gretter, Hambrusch, & Sands, 2016). Peer-learning is a crucial component that teachers need for their learning and growth. Indeed, teacher communities and 'professional learning networks' have been extremely successful in the past for teachers??? social, cognitive, affective, and identity growth (Trust, Krutka, & Carpenter, 2016). In particular, there have been cases where high school CS teacher networks were central for inculcating a sense of community, promoting teacher reflection, and helping create a change in teaching practices (Ni, Guzdial, Tew, Morrison, & Galanos, 2011). As many CS teachers might have time constraints, busy schedules, and geographical limitations to form offline CS communities, it becomes important to also foster online communities for CS educators. It is no surprise that online networks for CS teachers have been growing in the recent years (Brown and Kolling, 2013). In this study, the online network we will focus on wil be CSEd SE. 
+
+Given the context of the study, we choose to focus on the 'community of practice' framework to set a base. Communities of practice are "....groups of people who share a concern or a passion for something they do and learn how to do it better as they interact regularly" (Wenger, 2011, p. 1). These communities have the following traits: (a) a domain of shared interest; (b) people who engage in joint activities and discussions; and (c) members who are practitioners (such as educators). Further, according to Wenger, they should demonstrate (a) mutual engagement (such as a dialogue instead of one directional information flow); (b) a joint enterprise; and (c) a shared repertoire. These three traits represent "...three dimensions of the relation by which practice is the source of coherence of a community" (Wenger, 1998, p. 72). The mutual engagement component is especially important because a one-directional sharing of information will not be representative of a community. 
+
+The CSEd SE has many elements that could potentially make it a 'community of practice'. For instance, there are clear boundaries in terms of membership to the forum. The forum has a unique purpose, that is to build knowledge and dialogue in the domain of CS education. Further, the discussions on the forum are not generally a unidirectional venture. The commenting feature, for instance, allows scope for a back and forth dialogue. Finally, the presence of moderators and editors for maintenance of the forum, scope of democratic elections for the selection of moderators, reputation points based on user-generated voting system, gives CSEd SE the traits of a community of practice. Indeed, a literature review of informal online teacher communities revealed that the communities of practice framework has often been used to study teacher interactions in online forums (Macia & Garcia, 2016).
+
+Given this framework, we will be exploring the directionality of answering questions, that is, explore the extent of mutual engagement, in CSEd SE. We will also be exploring if there are any clusters of users in the forum. There might also be some individuals who have a high between centrality, that users who might act as bridges between different sub-groups or clusters within the CSEd SE network. Identifying these 'knowledge brokers', who have the potential to help moving knowledge between different places and clusters, can be important for practitioners interested in PD for CS teachers (Wenger, 2000).
+
+There might also be some users who have a high out-degree score, that is users who might be highly connected, have high popularity or reputation, and thus act as a source of high social capital and knowledge. Previous studies using Social Network Analysis on the Stack Exchange Network, in particular the Stackoverflow website, found that users with high reputation points tend to ask more questions and also answer more highly voted questions (Movshovitz-Attias, Movshovitz-Attias, Steenkiste, & Faloutsos, 2013). Further, activities of users in their initial stages of joining the forum have been proven to be predictive of their future activities. Thus, it might possible to identify experts on these forums quite early. This identification of expertise might be beneficial to practitioners in fostering and designing discussion forums for educators.  
+
+The network studies on Stack Exchange Network until now have not focused on education related forums. In addition, they have used only reputation points of users to indicate the amount of good quality answers given by the users. In this study, we will also focus on whether the topic of the question and any prior relationship with the user who asked the question, influences the way a question is answered. By doing this, we hope to see if the expert users are agnostic to the users or topics that they answer. On the other hand, users might also exhibit expertise in particular topics, by preferring to answer questions only in certain topics. This again might be beneficial for practitioners interested in developing online communities of practice for CS educators to identify topic-specific experts. 
+
+Using this communities of practice framework, three research questions guided our study:  
+* *RQ1.* What are the characteristics of users who contributed to the CSEd SE's core network of interactions?  
+* *RQ2.* Does network clustering occur in the context of the CSEd SE's core network of interactions? If so, what are some characteristics of these clusters?  
+* *RQ3.* From all the questions that users are exposed to in the CSEd SE's core network of interactions, what factors predict the questions that users to respond to?
+
+# Method
+
+## Data Collection
+
+The data from the CSEd SE forum were collected through data mining, using the statistical software _R_ (R Core Team, 2018). In particular, we used the R package _stackr_ (Robinson, 2018) to extract data from the CSEd SE website. The stackr package helps obtain the read-only features of the Stack Exchange API with the ability to download information on questions, answers, users, tags, and other aspects of the site so that they can be analyzed in R.
+
+Using stackr, we were able to collect the metadata for CSEd SE questions, answers, comments, tags, and users. The data are representative of all the information generated in the website from May 2017 (site launch) to June 2018. These metadata included information such as question identity number, answer identity number, user identity number, tag name, reputation scores of users, the date they joined the forum, and so on. This data collection resulted in a corpus of 559 questions asked by 210 different users, 2,675 answers contributed by 651 different users, and 7,209 comments from CSEd SE. 
+
+## Data Analysis
+
+First, we loaded the necessary R packages and input our data.
+
+```{r libraries, include=FALSE}
+#library(stackr)  # for collecting data from Stack Exchange
+library(tidyverse)  # for data manipulation; includes library(dplyr); library(ggplot2)
+library(stringr)  # for ease of working with string and character varbiables
+library(lubridate)  # for ease of working with dates
+library(gridExtra)  # for working with "grid" graphics, notably to arrange multiple grid-based plots on a page, and draw tables
+library(igraph)  # for processing social network
+library(ggraph)  # for visualizing social network
+library(moments)  # for skewness and kurtosis statistics
+library(lme4)  # for building selection model using linear mixed-effects
+library(sjstats)
+library(sjPlot)
+```
+
+```{r load_data, include=FALSE}
+library(tidyverse)
+## assumes filenames are stored in same directory
+file_list <- stringr::str_extract_all(dir(), "^data\\S+", simplify=TRUE)
+file_list <- file_list[file_list[,1] != "", ]
+#1: answers
+#2: comments
+#3: questions
+#4: users
+#5: tags
+
+csed_og <- file_list %>% lapply(read.csv, header=TRUE)  # csed_og[[i]] = sample i  |  csed_og[[i]][1,] = row 1 of sample i
+#csed_og %>% sapply(dim)
+#csed_og %>% sapply(names)
+```
+
+We then reshaped the data for analysis. We used the R package _igraph_ (Csardi, 2018) to create a graph of the CSEd SE's _core network of interactions_, focusing on nodes in the network (i.e., contributors) with degree of three or higher. In other words, we excluded users who participatd as "tag-alongs," perhaps answering a question or two but not interacting with other users in a significant way.
+
+```{r reshape_data, include=FALSE}
+csed_ques <- csed_og[[3]] %>% as.data.frame %>% 
+        arrange(desc(score)) %>%
+        dplyr::rename(., display_name = owner_display_name) %>%
+        mutate(display_name = as.character(display_name))
+csed_users <- csed_og[[4]] %>% as.data.frame %>%
+        mutate(display_name = as.character(display_name))
+csed_ans <- csed_og[[1]] %>% as.data.frame %>%
+        dplyr::rename(., display_name = owner_display_name) %>%
+        mutate(display_name = as.character(display_name))
+
+users_ans <- csed_og[[1]] %>% as.data.frame %>% 
+        count(owner_display_name) %>%
+        dplyr::rename(., 
+                      display_name = owner_display_name,
+                      questions_answered = n
+                      ) %>%
+        mutate(display_name = as.character(display_name))
+
+users_ques <- csed_ques %>% 
+        count(display_name) %>%
+        dplyr::rename(., questions_asked = n)
+
+users_plus_data <- csed_users %>% 
+        full_join(users_ans, by = 'display_name') %>% 
+        full_join(users_ques, by = 'display_name') %>% 
+        mutate(membership_duration_days = {creation_date %>% 
+                       lubridate::interval(., mdy_hms("11-15-2018 08:00:00")) %>%
+                       lubridate::time_length(., "days")}
+               ) %>% 
+        distinct(display_name, .keep_all=TRUE)
+#saveRDS(users_plus_data, "model-output/users_plus_data.rds")
+#users_plus_data <- read_rds("model-output/users_plus_data.rds")
+```
+
+```{r create_initial_graph, include=FALSE}
+## Create a dataframe with responder, asker, presence of link (0 or 1), and weight of link
+## focus analysis on nodes with degree of 3 or more (so more than back and forth, which is degree=2)
+library(igraph)
+csed_graph_0 <- csed_ques %>% 
+        inner_join(csed_ans, by = "question_id") %>%
+        mutate(asker = display_name.x, responder = display_name.y) %>% 
+        dplyr::select(responder, asker) %>%  # this creates an edgelist
+        as.matrix %>% graph_from_edgelist(directed=TRUE) %>%
+        set_vertex_attr(name='degree', value=degree(., mode='total', loops=FALSE)) %>% 
+        set_vertex_attr(name='in_degree', value=degree(., mode='in', loops=FALSE)) %>% 
+        set_vertex_attr(name='out_degree', value=degree(., mode='out', loops=FALSE)) %>%
+        delete_vertices({vertex_attr(., 'degree') <= 2} %>% which)
+csed_graph_0 %>% summary
+```
+
+```{r contributors_with_weights, include=FALSE}
+csed_weighted_df <- csed_graph_0 %>% 
+        as_adjacency_matrix(sparse=FALSE) %>% 
+        graph_from_adjacency_matrix(weighted=TRUE) %>%
+        get.data.frame
+all_contributors <- c(csed_weighted_df$from, csed_weighted_df$to) %>% unique
+all_contributors %>% length
+
+csed_graph_1 <- csed_weighted_df %>% 
+        dplyr::select(from, to) %>%  # this creates an edgelist
+        as.matrix %>% graph_from_edgelist(directed=TRUE) %>%
+        set_vertex_attr(name='degree', value=degree(., mode='total', loops=FALSE)) %>% 
+        set_vertex_attr(name='in_degree', value=degree(., mode='in', loops=FALSE)) %>% 
+        set_vertex_attr(name='out_degree', value=degree(., mode='out', loops=FALSE)) %>%
+        delete_vertices({vertex_attr(., 'degree') <= 2} %>% which)
+csed_graph_1 %>% summary
+```
+
+```{r remove_reciprocal, include=FALSE}
+is_duplicated_from_top <- csed_weighted_df %>% apply(MARGIN=1, sort) %>% t %>%
+        duplicated %>% which
+is_duplicated_from_bottom <- csed_weighted_df %>% apply(MARGIN=1, sort) %>% t %>%
+        duplicated(fromLast = TRUE) %>% which
+is_duplicated <- c(is_duplicated_from_top, is_duplicated_from_bottom)
+
+non_reciprocal_df <- csed_weighted_df[-is_duplicated, ] %>%
+        filter(from != to) %>%
+        distinct(from, to, .keep_all = TRUE)
+non_reciprocal_df %>% nrow
+csed_weighted_df %>% nrow
+
+non_reciprocal_contributors <- c(non_reciprocal_df$from, non_reciprocal_df$to) %>% unique
+non_reciprocal_contributors %>% length
+
+csed_graph_2 <- non_reciprocal_df %>% 
+        dplyr::select(from, to) %>%  # this creates an edgelist
+        as.matrix %>% graph_from_edgelist(directed=TRUE) %>% 
+        set_vertex_attr(name='degree', value=degree(., mode='total', loops=FALSE)) %>% 
+        set_vertex_attr(name='in_degree', value=degree(., mode='in', loops=FALSE)) %>% 
+        set_vertex_attr(name='out_degree', value=degree(., mode='out', loops=FALSE)) %>%
+        delete_vertices({vertex_attr(., 'degree') <= 2} %>% which)
+csed_graph_2 %>% summary
+```
+
+```{r create_final_dataframe, include=FALSE}
+csed_full_weighted <- expand.grid(from=non_reciprocal_contributors,
+                                  to=non_reciprocal_contributors,
+                                  stringsAsFactors=FALSE) %>% 
+        full_join(non_reciprocal_df) %>%
+        rename(responder = from, asker = to) %>%
+        mutate(weight = ifelse(is.na(weight), 0, weight),
+               tie = if_else(weight > 0, 1, 0)
+               ) %>%
+        left_join(users_plus_data, by=c("responder" = "display_name")) %>%
+        rename(rep_responder = reputation,
+               role_responder = user_type,
+               time_responder = membership_duration_days, 
+               ques_responder = questions_answered
+               ) %>%
+        select(tie, weight, 
+               responder, rep_responder, role_responder, time_responder, ques_responder,
+               asker
+               ) %>% 
+        left_join(users_plus_data, by=c("asker" = "display_name")) %>%
+        rename(rep_asker = reputation,
+               role_asker = user_type,
+               time_asker = membership_duration_days,
+               ques_asker = questions_asked
+               ) %>% 
+        select(tie, weight, 
+               responder, rep_responder, role_responder, time_responder, ques_responder,
+               asker, rep_asker, role_asker, time_asker, ques_asker
+               ) %>% 
+        filter(!is.na(time_responder),
+               !is.na(time_asker)
+               )
+csed_full_weighted %>% dim
+csed_full_weighted %>% distinct(asker) %>% nrow  # should be equal to the number of nodes in the graph
+csed_full_weighted$tie %>% sum  # should be equal to the number of edges in the graph
+
+#saveRDS(csed_full_weighted, "model-output/csed_full_weighted.rds")
+#csed_full_weighted <- read_rds("model-output/csed_full_weighted.rds")
+```
+
+```{r create_final_graph, include=FALSE}
+csed_graph <- csed_full_weighted %>%
+        filter(weight > 0) %>% 
+        select(responder, asker) %>%  # this creates an edgelist
+        as.matrix %>% graph_from_edgelist(directed=TRUE) %>%
+        set_vertex_attr(name='degree', value=degree(., mode='total', loops=FALSE)) %>% 
+        set_vertex_attr(name='in_degree', value=degree(., mode='in', loops=FALSE)) %>% 
+        set_vertex_attr(name='out_degree', value=degree(., mode='out', loops=FALSE))
+csed_graph %>% summary
+#saveRDS(csed_graph, "model-output/csed_graph.rds")
+#csed_graph <- read_rds("model-output/csed_graph.rds")
+```
+
+# Results
+
+## RQ1. What are the characteristics of users who contributed to the CSEd SE's core network of interactions? 
+
+To answer RQ1, we first tallied the number of questions, answers, and contributors to the CSEd SE during our data collection time period.
+
+```{r rq1_users, include=TRUE}
+csed_ques$question_id %>% unique %>% length  # number of distinct questions in CSEd SE
+csed_ques$display_name %>% unique %>% length # number of total, distinct contributors
+
+csed_ans$question_id %>% unique %>% length  # number of questions answered in our time window
+csed_ans$answer_id %>% unique %>% length  # number of answers in our time window
+csed_ans$display_name %>% unique %>% length  # number of people who answered questions in our time window
+
+## these are the different responders in the core network
+csed_full_weighted %>% filter(weight > 0) %>%
+        select(responder) %>% unlist %>% unique %>% length
+
+## these are the different question askers in the core network
+csed_full_weighted %>% filter(weight > 0) %>%
+        select(asker) %>% unlist %>% unique %>% length
+
+## these are total, distinct contributors (askers & responders) in the core network
+c({csed_full_weighted %>% filter(weight > 0) %>% select(responder) %>% unlist}, 
+  {csed_full_weighted %>% filter(weight > 0) %>% select(asker) %>% unlist}
+  ) %>% unique %>% length
+```
+
+We then calculated descriptive statistics. 
+
+```{r rq1_stats, include=TRUE, echo=FALSE}
+library(moments)
+csed_degree <- csed_graph %>% vertex_attr(name='degree')
+csed_in_degree <- csed_graph %>% vertex_attr(name='in_degree')
+csed_out_degree <- csed_graph %>% vertex_attr(name='out_degree')
+
+stats_degree <- c(mean(csed_degree), sd(csed_degree), median(csed_degree),
+                  range(csed_degree), skewness(csed_degree), kurtosis(csed_degree)
+                  ) %>% round(2)
+stats_in_degree <- c(mean(csed_in_degree), sd(csed_in_degree), median(csed_in_degree),
+                     range(csed_in_degree), skewness(csed_in_degree), kurtosis(csed_in_degree)
+                     ) %>% round(2)
+stats_out_degree <- c(mean(csed_out_degree), sd(csed_out_degree), median(csed_out_degree),
+                      range(csed_out_degree), skewness(csed_out_degree), kurtosis(csed_out_degree)
+                      ) %>% round(2)
+
+stats_summary <- stats_degree %>% cbind(stats_in_degree) %>% cbind(stats_out_degree)
+colnames(stats_summary) <- c("Degree", "In-Degree", "Out-Degree")
+rownames(stats_summary) <- c("mean: ", "sd: ", "median: ", "min: ", "max: ", "skewness: ", "kurtosis: ")
+stats_summary
+```
+
+## RQ2. Does network clustering occur in the context of the CSEd SE's core network of interactions? If so, what are some characteristics of these clusters?  
+
+As a reminder, a quick summary of the the CSEd SE core network of interactions during the time period of our study:
+
+```{r network_description, include=TRUE, echo=FALSE}
+network_summary <- csed_graph %>% V %>% length %>% 
+        rbind(csed_graph %>% gsize) %>% 
+        rbind(csed_graph %>% diameter)  # the length of the longest geodesic (max distance between two vertices)
+colnames(network_summary) <- c("")
+rownames(network_summary) <- c("Number of nodes: ", "Number of edges: ", "Diameter: ")
+network_summary
+```
+
+### Clustering: Spinglass Algorithm
+
+A community is a set of nodes with many edges inside the community and few edges between outside it (i.e. between the community itself and the rest of the graph).
+
+The _spinglass clustering algorithm_ maps community detection onto finding the ground state of an infinite range spin glass. Csardi, Nepusz, and Airoldi (2016, pp. 132-133) explained:
+
+>
+The clustering method of [Reichardt and Bornholdt](https://arxiv.org/abs/cond-mat/0603718) (2006) is motivated by spin glass models from statistical physics. Such models are used to describe and explain magnetism at the microscopic scale at finite temperatures. Reichardt and Bornholdt (2006) drew an analogy between spin glass models and the problem of community detection on graphs and proposed an algorithm based on the simulated annealing of the spin glass model to obtain well-defined communities in a graph. A spin glass model consists of a set of particles called spins that are coupled by ferromagnetic or antiferromagnetic bonds. Each spin can be in one of k possible states. The well-known Potts model then defines the total energy of the spin glass with a given spin configuration... Spins and interactions in the Potts model are very similar to graphs: each spin in the model corresponds to a vertex, and each interaction corresponds to an edge... Reichardt and Bornholdt (2006) gave efficient update rules for the above energy function, making it possible to apply a simulated annealing procedure to find the ground state of the model that corresponds to a low energy configuration. Their algorithm starts from a random configuration of spins and tries to flip all the spins once in each time step. After each individual spin flip, the energy of the new configuration is evaluated.
+>
+
+In other words, the spinglass clustering algorithm partitions the vertices into communities by optimizing an energy function. The energy is optimized using the following function (Reichardt and Bornholdt, 2008): 
+$$H({\sigma}) = -\sum(a_{ij} \textrm{internal links}) + \sum(b_{ij}\textrm{internal non-links}) + \sum(c_{ij}\textrm{external links}) - \sum(d_{ij}\textrm{external non-links})$$. 
+
+This function penalizes (1) missing edges or non-links of people/nodes in the same cluster and (2) present links or edges between people/nodes in different clusters. It also rewards (1) present links or edges between people/nodes in the same cluster and (2) missing links or edges between people/nodes in different clusters. Thus, a lower score (i.e., energy level) is better as it means that the internal links and external non-links have more weightage in that model. In other words, in a strong model, members within clusters are strongly linked and members in separate clusters are weakly linked . Here, $a_{ij}, b_{ij}, c_{ij}, d_{ij}$ represent the individual weights of the four components. 
+
+The initial R code to produce spinglass clusters is straightforward:
+
+```{r spinglass, include=TRUE}
+csg_0 <- csed_graph %>% cluster_spinglass  # creates the clusters
+csg_0$membership %>% unique %>% length  # number of clusters/communities/groups
+```
+
+One of the important outcomes of this method is the _modularity_ value $M$. Modularity measures how good the division is, or how separated are the different vertex types from each other. The spinglass algorithm looks for the modularity of the optimal partition. For a given network, the partition with maximum modularity corresponds to the optimal community structure (i.e., a higher $M$ is better).
+
+Note also that if $M$ = 0, all nodes belong to one group; if $M$ < 0, each node belongs to separate community. 
+
+```{r modularity, include=TRUE}
+csg_0$modularity  # The modularity of a graph with respect to some division (or vertex types) 
+```
+
+*Identifying the "Typical" Number of Clusters Returned with the Spinglass Algorithm*
+
+It is important to note that a different result is returned each time the spinglass clustering algorithm is run. For this reason, we needed to run a number of simulations to see what the "typical" number of clusters are. We ran the algorithm 100 times and looked at the mean and median number of clusters obtained. We made a note of a _seed_ that produced the median number of clusters, confirmed that this was reproducible, and then set this seed so that all future work will be run with this same clustering configuration.
+
+```{r spinglass_median_clusters, include=TRUE, echo=FALSE}
+#csg_matrix <- matrix(NA, nrow=1, ncol=100)
+#for (i in 1:100) {
+#        print(i)
+#        set.seed(i)
+#        csg = csed_graph %>% cluster_spinglass
+#        csg_matrix[1,i] <- max(csg$membership)
+#}
+#saveRDS(csg_matrix, "model-output/csg_matrix.rds")
+csg_matrix <- read_rds("model-output/csg_matrix.rds")
+
+csg_matrix_summary <- csg_matrix %>% length %>%
+        rbind(csg_matrix %>% mean %>% round(2)) %>% 
+        rbind(csg_matrix %>% sd %>% round(2)) %>% 
+        rbind(csg_matrix %>% min) %>%
+        rbind(csg_matrix %>% max) %>%
+        rbind(csg_matrix %>% as.vector %>% skewness %>% round(2)) %>%
+        rbind(csg_matrix %>% as.vector %>% kurtosis %>% round(2)) %>%
+        rbind(csg_matrix %>% median)
+colnames(csg_matrix_summary) <- c("")
+rownames(csg_matrix_summary) <- c("number of tests: ", "mean: ", "sd: ", "min: ", "max: ", "skewness: ", "kurtosis: ", "median: ")
+csg_matrix_summary
+```
+
+```{r spinglass_seed_set, include=TRUE, echo=FALSE}
+## select a seed from this list which reproduces the median number of clusters
+#seeds <-{as.vector(csg_matrix) == median(csg_matrix)} %>% which
+#our_seed <- seeds %>% sample(1)
+#saveRDS(our_seed, "model-output/our_seed.rds")
+our_seed <- read_rds("model-output/our_seed.rds")
+set.seed(our_seed)  # set the seed
+csg <- csed_graph %>% cluster_spinglass
+
+csg_summary <- csg$vcount %>% 
+        rbind(csed_graph %>% gsize) %>% 
+        rbind(csg$csize %>% length) %>% 
+        rbind(csg$modularity %>% round(4))
+colnames(csg_summary) <- c("")
+rownames(csg_summary) <- c("Number of nodes: ", "Number of edges: ", "Number of clusters: ", "Modularity: ")
+csg_summary
+
+print("Size of each cluster: ", quote=FALSE); print(csg$csize)
+#csg$names  # names of each of the vertices (nodes)
+```
+
+*Test of Statistical Significance for Spinglass Clusters*
+
+The test for statistical significance for spinglass clustering is a bit different than the familiar tests that return $p$-values (Csardi, Nepusz, & Airoldi (2016, pp. 132-138).
+
+The idea behind this test of significance is that a random network of equal size and degree distribution as our observed network should have a lower modularity score--that is, if the observed network does in fact have statistically significant clustering.
+
+The following R procedure generates 100 randomized instances of our network (with the same size and degree distribution) using the `sample_ degseq()` function. The `method = 'vl'` ensures that there are no loop edges in the randomly generated networks. We then applied the spinglass clustering algorithm to each of the 100 randomized instances of the network.
+
+A '0' result from this procudure indicates that no randomized networks have community structure with a modularity score that is higher than the one obtained from the original, observed network. Hence a '0' result means that our network has significant community structure; any non-zero results means that the detected spinglass clusters are not statistically significant.
+
+```{r spinglass_sig_test, include=TRUE}
+#degrees <- csed_graph %>% as.undirected %>% degree(mode='all', loops=FALSE)
+#qr_vl <- replicate(100, sample_degseq(degrees, method="vl"), 
+#                   simplify=FALSE) %>%
+#        lapply(cluster_spinglass) %>%
+#        sapply(modularity) 
+#saveRDS(qr_vl, "model-output/qr_vl.rds")
+qr_vl <- read_rds("model-output/qr_vl.rds")
+sum(qr_vl > csg$modularity) / 100
+```
+
+### Network Visualization with Clusters
+
+Finally, we created a visualization of our network structure, using the color palette generated by our spinglass clustering. Here, we used the _Fruchterman-Reingold layout algorithm_ (`layout = 'fr'`), which is appropriate for large (but still with less than 1,000 nodes), potentially disconnected networks.
+
+```{r set_cluster_palette, include=FALSE}
+## color-blind palette
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+csg_palette <- cbPalette[csg$membership]
+```
+
+```{r network_visualization, include=TRUE, echo=FALSE}
+library(ggraph)
+csed_graph_weighted <- csed_graph %>%
+        set_edge_attr(name='cluster_weight', 
+                      value=ifelse(igraph::crossing(csg, csed_graph), 1, 15))
+csed_graph_weighted %>% summary
+
+layout <- csed_graph_weighted %>% create_layout(layout='fr')
+
+ggraph(layout) +
+        geom_edge_link(width=.1, arrow = arrow(length=unit(1, 'mm'))) +
+        geom_node_point(alpha=.8, 
+                        size=3, 
+                        aes(color=csg_palette)
+                        ) +
+        theme_bw() +
+        theme(plot.background = element_blank(),
+              panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank(),
+              panel.border = element_blank(),
+              axis.title = element_blank(),
+              axis.text = element_blank(),
+              axis.ticks = element_blank(),
+              legend.position="none"
+        )
+#ggsave("model-output/network_visualization.png", width = 1 * 10, height = 1 * 10)
+```
+
+## RQ3. What factors predict the questions that users to respond to?
+
+### Conceptualizing the Selection Model
+
+We chose to use a $p_2$ model for conceptualizing the selection process. We did this so that we could account for fixed effects of dyads, receivers (i.e., question askers), and senders (i.e., question responders) in addition to random effects of receivers and senders.
+
+Here are the levels of the model:
+
+*Null* $p_2$ *Selection Model: Responder and Asker Random-Effects*
+
+We started by building the null $p_2$ model for predicting ties (i.e., answering someone else's question on the CSEd SE). This model only considered responder and asker random effects, which would include in-degree and out-degree.
+
+*Pair Level* $p_2$ *Selection Model*
+
+Our pair level $p_2$ selection model for predicting ties added membership in the same clusters as a fixed effect in addition to the responder and asker random effects from the null $p_2$.
+
+This model considers sender and receiver fixed effects along with any random effects due to senders and recivers. The selection model for responder $i$ answering a question asked by user $i\prime$:  
+
+$$log(\frac{p(\textrm{w}_{ii\prime})}{1-p(\textrm{w}_{ii\prime})}) = \theta_{00} + \theta_{0i} + \theta_{0i\prime} + \theta_{0q}  +$$ 
+$$\theta_1|x_i - x_i\prime| + \theta_2|y_i - y_i\prime| + \theta_3|a_{iqt0}-a_{iqt1}| + \rho(w)_{i\prime i} + \epsilon_0$$
+Where:
+
+1. $\theta_{00}$ = Intercept
+2. $\theta_{0i}$ = Sender/reponder effects 
+3. $\theta_{0i\prime}$ = Receiver/asker effects
+4. $\theta_{0q}$ = Question effects
+5. $|x_i - x_i\prime|$ = Difference in profession
+6. $|y_i - y_i\prime|$ = Difference in gender
+7. $|a_{iqt0}-a_{iqt1}|$ = Difference in answering in topic area at times t0 and t1. That is, prior ties/relationship of user $i$ to a topic area
+8. $\rho(w)_{i\prime i}$ = Reciprocity of $i$ and $i\prime$
+9. $w$ = Answering a certain question
+
+
+*Sender Level* $p_2$ *Selection Model for User* $i$ *Responding to the Question:*
+
+Our sender level $p_2$ selection model for predicting ties added responder fixed effects related to reputation, role, time on the platform, and questions asked in addition to the responder random effects.
+
+$$\theta_{0i} = \alpha_0 + \alpha_1(\textrm{Reputation points}_i) + \alpha_2(\textrm{Editor/Moderator}_i)$$
+$$+ \alpha_3(\textrm{Duration of membership}_i) + \alpha_4(\textrm{Number of questions previously answered}_i) + \epsilon_1$$
+
+Where
+
+1. Reputation points = The numerical reputation points associated with each user.
+2. Editor/Moderator =  1 if the responder answering question is an editor or a moderator. 0 otherwise.
+3. Duration of Membership = Time in months of being a member of CSEd SE
+4. Number of questions previously asked = Total number of questions asked up until present time.
+
+
+*Receiver Level* $p_2$ *Selection Model for User* $i\prime$ *Asking the Question:*
+
+$$\theta_{0i\prime} = \beta_0 + \beta_1(\textrm{Reputation points}_i\prime) + \beta_2(\textrm{Duration of membership}_i\prime) \\ + \beta_3(\textrm{Number of questions previously asked}_i\prime) + \epsilon_2$$
+
+Where
+
+1. Reputation points = The numerical reputation points associated with each user.
+2. Duration of Membership = Time in months of being a member of CSEd SE.
+3. Number of questions previously asked = Total number of questions asked up until present time.[^1]
+
+[^1]: We did not add Editor/Moderator role for askers, as when users are responding to an asker, they will not immediately know if the asker is an editor or moderator. The responder will only know this if they click and read the asker's profile. Given this, we decided to not include it in the model.
+
+$p_2$ *Selection Model for Question* $q$*:*
+
+$$\theta_{0q} = \gamma_0 + \gamma_1(\textrm{Number of votes}_q) + \gamma_2(\textrm{Number of answers}_q) + \gamma_3(\textrm{Number of views}_q) + \epsilon_3$$
+
+Where
+
+1. Number of votes =  Total up-votes the question got on the forum prior to $i$ answering the question.
+2. Number of answers =  Total answers the question had prior to $i$ answering the question.
+3. Number of views = Total views the question got on the forum prior to $i$ answering the question.
+
+### Identifying Sources of Multicollinearity
+
+We tested to see if these variables are highly correlated and if we needed to change the models that we proposed. These are the correlations that we tested:
+
+1. Correlations between number of votes, answers, and views
+2. Correlation between reputation points and number of questions answered/asked
+3. Correlation between reputation points and membership duration
+4. Correlation between questions asked and answered
+
+```{r correlation_plots1, include=TRUE, echo=FALSE}
+answer_v_views <- ggplot(csed_ques, aes(x=view_count, y=answer_count)) + 
+        geom_point() + 
+        geom_smooth(method='lm') +
+        ggtitle("Answers vs. Views") + 
+        xlab("Number of views") + 
+        ylab("Answer count") +
+        theme_bw() + 
+        theme(plot.background = element_blank(),
+              panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank(),
+              panel.border= element_blank(),
+              axis.line = element_line(color="black", size = .5)
+              )
+#ggsave("model-output/correlation1_answer_v_views.png", width = 1 * 10, height = 1 * 10)
+
+votes_v_views <- ggplot(csed_ques, aes(x=view_count, y=score)) + 
+        geom_point() + 
+        geom_smooth(method='lm') +
+        ggtitle("Votes vs. Views") + 
+        xlab("Number of views") + 
+        ylab("Sum of votes") +
+        theme_bw() + 
+        theme(plot.background = element_blank(),
+              panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank(),
+              panel.border= element_blank(),
+              axis.line = element_line(color="black", size = .5)
+              )
+#ggsave("model-output/correlation2_votes_v_views.png", width = 1 * 10, height = 1 * 10)
+
+grid.arrange(answer_v_views, votes_v_views, nrow=1)
+```
+
+```{r correlations1, include=TRUE, echo=FALSE}
+print("Correlations: ", quote=FALSE)
+cor(csed_ques[c("view_count", "answer_count", "score")], 
+    use = 'complete.obs') %>% round(2)
+```
+
+```{r correlation_plots2, include=TRUE, echo=FALSE, message=FALSE}
+reputation_v_answered <- ggplot(users_plus_data, aes(x=questions_answered, y=reputation)) + 
+        geom_point() + 
+        geom_smooth(method='lm') +
+        ggtitle("Reputation vs Questions Answered") + 
+        xlab("Questions Answered") + 
+        ylab("Reputation") +
+        theme_bw() + 
+        theme(plot.background = element_blank(),
+              panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank(),
+              panel.border= element_blank(),
+              axis.line = element_line(color="black", size = .5)
+              )
+#ggsave("model-output/correlation3_reputation_v_answered.png", width = 1 * 10, height = 1 * 10)
+
+reputation_v_asked <- ggplot(users_plus_data, aes(x=questions_asked, y=reputation)) + 
+        geom_point() + 
+        geom_smooth(method='lm') +
+        ggtitle("Reputation vs Questions Asked") + 
+        xlab("Questions Asked") +
+        ylab("Reputation") + 
+        theme_bw() + 
+        theme(plot.background = element_blank(),
+              panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank(),
+              panel.border= element_blank(),
+              axis.line = element_line(color="black", size = .5)
+              )
+#ggsave("model-output/correlation4_reputation_v_asked.png", width = 1 * 10, height = 1 * 10)
+
+reputation_v_duration <- ggplot(users_plus_data, aes(x=membership_duration_days, y=reputation)) +
+        geom_point() + 
+        geom_smooth(method='lm') +
+        ggtitle("Reputation vs Membership Duration") + 
+        xlab("Membership Duration") +
+        ylab("Reputation") +
+        theme_bw() + 
+        theme(plot.background = element_blank(),
+              panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank(),
+              panel.border= element_blank(),
+              axis.line = element_line(color="black", size = .5)
+              )
+#ggsave("model-output/correlation5_reputation_v_duration.png", width = 1 * 10, height = 1 * 10)
+
+asked_v_answered <- ggplot(users_plus_data, aes(x=questions_answered, y=questions_asked)) + 
+        geom_point() + 
+        geom_smooth(method='lm') +
+        ggtitle("Questions Asked vs Questions Answered") + 
+        xlab("Questions Answered") + 
+        ylab("Questions Asked") +
+        theme_bw() + 
+        theme(plot.background = element_blank(),
+              panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank(),
+              panel.border= element_blank(),
+              axis.line = element_line(color="black", size = .5)
+              )
+#ggsave("model-output/correlation6_asked_v_answered.png", width = 1 * 10, height = 1 * 10)
+
+grid.arrange(reputation_v_answered, reputation_v_asked,
+             reputation_v_duration, asked_v_answered, 
+             nrow = 2)
+```
+
+```{r correlations2, include=TRUE, echo=FALSE}
+print("Correlations: ", quote=FALSE)
+cor(users_plus_data[c("reputation", "questions_answered", 
+                      "questions_asked", "membership_duration_days")], 
+    use = 'complete.obs') %>% round(2)
+```
+
+### Updated Models
+
+*New Sender Level* $p_2$ *Selection Model for User* $i$ *Responding to the Question:*
+
+$$\theta_{0i} = \alpha_0 + \alpha_1(\textrm{Reputation points}_i) + \alpha_2(\textrm{Editor/Moderator}_i) \\ + \alpha_3(\textrm{Duration of membership}_i) + \Theta_{zi} + \epsilon_1$$
+(We removed 'number of questions previously answered' as it was highly correlated with reputation points. We added random effects, $\Theta_{zi}$ in case that plays a role in receiver/asker effects)
+
+*New Receiver Level* $p_2$ *Selection Model for User* $i\prime$ *Asking the Question:*
+
+$$\theta_{0i\prime} = \beta_0 + \beta_1(\textrm{Reputation points}_i\prime) + \beta_2(\textrm{Duration of membership}_i\prime)  + \Theta_{zi\prime} + \epsilon_2$$
+(We removed 'number of questions previously asked' as it was highly correlated with reputation points. We added random effects, $\Theta_{zi\prime}$ in case that plays a role in receiver/asker effects)
+
+*New* $p_2$ *Selection Model for Question* $q$*:*
+
+$$\theta_{0q} = \gamma_0 + \gamma_1(\textrm{Number of votes}_q) + \Theta_{zq} + \epsilon_3$$
+
+(We removed 'number of answers' and 'number of views' as they were highly correlated with number of votes)
+
+The variables in the current model reflect prior research on teacher interactions where things such as 'reputation', years of service (in CSEd SE it is 'membership duration', formally designated leaders (in CSEd SE it is 'editor/moderator'), etc mattered for the selection model. 
+
+### Constructing the Selection Models Usng Linear Mixed-Effects Models
+
+Having conceptually described the selection models of users on CSEd SE choosing to answer certain questions, we then built these in R using _generalized linear mixed-effects_ (GLME) with the _lme4_ package (Bates, Maechler, Bolker, & Walker, 2018). We tried to fit these GLME models by incrementally adding factors; in total we created five models: (a) the null $p_*$ with only responder and asker random effects, (b) model 1 which added responder and asker reputation scores as fixed effects, (c) model 2 which added responder and asker roles as fixed effects, (d) model 3 which added responder and asker time on the CSEd SE as fixed effects, and (e) model 4 which added responders' questions answered and askers' questions asked as fixed effects.
+
+For each model, we calculated the _standard error of the mean_ (SEM) of the conditional modes of the random-effects coefficients from the fitted model; SEM equals the standard deviation divided by the square root of the sample size. We also used the R package _sjstats_ (Ludecke, 2018b) to report the _intraclass-correlation coefficient_ (ICC) scores for responders and askers; the ICC represents the percent of variability due to the group. Finally, we compared the _Akaike information criterion_ (AIC) and the _Bayesian information criterion_ (BIC), keeping in mind that smaller values are better.
+
+We present SEM, ICC, AIC, and BIC scores for all five $p_2$ selection models in a summary table at the end. Finally, for each selection model, we used the _sjPlot_ R package (Ludecke, 2018a) to create plots showing the conditional modes of the random-effects coefficients and standard errors by contributor, in other words, the difference between the average predicted response for a given set of fixed-effect values (treatment) and the response predicted for a particular individual. This is a method to see how much any individual differs from the population. We examined these plots to see how they changed as we added factors to the selection model.
+
+*Null* $p_2$ *Selection Model: Responder and Asker Random-Effects*
+
+We started by building the null $p_2$ model for predicting ties (i.e., answering someone else's question on the CSEd SE).
+
+```{r p2_0, include=FALSE}
+library(lme4)
+#p2_0 <- glmer(tie ~ 1 + (1|responder) + (1|asker),
+#              data = csed_full_weighted,
+#              family = binomial
+#              )
+#saveRDS(p2_0, "model-output/p2_0.rds")
+p2_0 <- read_rds("model-output/p2_0.rds")
+```
+
+```{r p2_0_stats, include=FALSE}
+library(sjstats)
+ranef0 <- p2_0 %>% ranef(., condVar=TRUE, drop=TRUE)
+ranef0$responder <- ranef0$responder %>% exp
+ranef0$asker <- ranef0$asker %>% exp
+se0_responder <- {ranef0$responder %>% sd} / {ranef0$responder %>% length %>% sqrt}
+se0_asker <- {ranef0$asker %>% sd} / {ranef0$asker %>% length %>% sqrt}
+
+p2_0_responder <- c(se0_responder, icc(p2_0)[1]) %>% round(digits=4) %>% as.vector
+p2_0_asker <- c(se0_asker, icc(p2_0)[2]) %>% round(digits=4) %>% as.vector
+p2_0_info_criteria <- c(AIC(p2_0), BIC(p2_0)) %>% round(digits=4) %>% as.vector
+```
+
+```{r p2_0_plots, include=FALSE}
+#sjPlot::tab_model(p2_0, show.icc = TRUE)
+
+p2_0_plots <- sjPlot::plot_model(p2_0, type='re', sort.est=2, show.se=TRUE, show.legend=TRUE)
+
+p2_0_plots[1]
+#ggsave("model-output/random_effects0_responder.png", width = 1 * 10, height = 3 * 10)
+
+p2_0_plots[2]
+#ggsave("model-output/random_effects0_asker.png", width = 1 * 10, height = 3 * 10)
+```
+
+*Pair Level* $p_2$ *Selection Model*
+
+With our current level of analysis, we are unable to construct the pair-level $p_2$ selection model at this time.
+
+*Sender Level* $p_2$ *Selection Model*
+
+We constructed a sender level $p_2$ selection model for predicting ties by incrementally adding responder fixed effects related to (a) reputation, (b) role, (c) time on the platform, and (d) questions answered in addition to the responder and asker random effects. However, the third model failed to converge and so we have not be included the responders' time on the CSEd SE in the results.
+
+```{r p2_2a, include=FALSE}
+#p2_2a <- glmer(tie ~ 1 + 
+#                      log(rep_responder) + 
+#                      (1|responder) + (1|asker),
+#              data = csed_full_weighted,
+#              family = binomial
+#              )
+#saveRDS(p2_2a, "model-output/p2_2a.rds")
+p2_2a <- read_rds("model-output/p2_2a.rds")
+```
+
+```{r p2_2a_stats, include=FALSE}
+ranef2a <- p2_2a %>% ranef(., condVar=TRUE, drop=TRUE)
+ranef2a$responder <- ranef2a$responder %>% exp
+ranef2a$asker <- ranef2a$asker %>% exp
+se2a_responder <- {ranef2a$responder %>% sd} / {ranef2a$responder %>% length %>% sqrt}
+se2a_asker <- {ranef2a$asker %>% sd} / {ranef2a$asker %>% length %>% sqrt}
+
+p2_2a_responder <- c(se2a_responder, icc(p2_2a)[1]) %>% round(digits=4) %>% as.vector
+p2_2a_asker <- c(se2a_asker, icc(p2_2a)[2]) %>% round(digits=4) %>% as.vector
+p2_2a_info_criteria <- c(AIC(p2_2a), BIC(p2_2a)) %>% round(digits=4) %>% as.vector
+```
+
+```{r p2_2a_plots, include=FALSE}
+#sjPlot::tab_model(p2_2a, show.icc = TRUE)
+
+p2_2a_plots <- sjPlot::plot_model(p2_2a, type='re', sort.est=2, show.se=TRUE, show.legend=TRUE)
+
+p2_2a_plots[1]
+#ggsave("model-output/random_effects2a_responder.png", width = 1 * 10, height = 3 * 10)
+
+p2_2a_plots[2]
+#ggsave("model-output/random_effects2a_asker.png", width = 1 * 10, height = 3 * 10)
+```
+
+```{r p2_2b, include=FALSE}
+#p2_2b <- glmer(tie ~ 1 + 
+#                      log(rep_responder) + 
+#                      role_responder + 
+#                      (1|responder) + (1|asker),
+#              data = csed_full_weighted,
+#              family = binomial
+#              )
+#saveRDS(p2_2b, "model-output/p2_2b.rds")
+p2_2b <- read_rds("model-output/p2_2b.rds")
+```
+
+```{r p2_2b_stats, include=FALSE}
+ranef2b <- p2_2b %>% ranef(., condVar=TRUE, drop=TRUE)
+ranef2b$responder <- ranef2b$responder %>% exp
+ranef2b$asker <- ranef2b$asker %>% exp
+se2b_responder <- {ranef2b$responder %>% sd} / {ranef2b$responder %>% length %>% sqrt}
+se2b_asker <- {ranef2b$asker %>% sd} / {ranef2b$asker %>% length %>% sqrt}
+
+p2_2b_responder <- c(se2b_responder, icc(p2_2b)[1]) %>% round(digits=4) %>% as.vector
+p2_2b_asker <- c(se2b_asker, icc(p2_2b)[2]) %>% round(digits=4) %>% as.vector
+p2_2b_info_criteria <- c(AIC(p2_2b), BIC(p2_2b)) %>% round(digits=4) %>% as.vector
+```
+
+```{r p2_2b_plots, include=FALSE}
+#sjPlot::tab_model(p2_2b, show.icc = TRUE)
+
+p2_2b_plots <- sjPlot::plot_model(p2_2b, type='re', sort.est=2, show.se=TRUE, show.legend=TRUE)
+
+p2_2b_plots[1]
+#ggsave("model-output/random_effects2b_responder.png", width = 1 * 10, height = 3 * 10)
+
+p2_2b_plots[2]
+#ggsave("model-output/random_effects2b_asker.png", width = 1 * 10, height = 3 * 10)
+```
+
+```{r p2_2c, include=FALSE}
+## the third Sender Level p2 Selection Model failed to converge
+## "Model failed to converge with max|grad| = 0.00270358 (tol = 0.001, component 1)""
+#p2_2c <- glmer(tie ~ 1 + 
+#                      log(rep_responder) + 
+#                      role_responder + 
+#                      log(time_responder) + 
+#                      (1|responder) + (1|asker),
+#              data = csed_full_weighted,
+#              family = binomial
+#              )
+```
+
+```{r p2_2d, include=FALSE}
+#p2_2d <- glmer(tie ~ 1 + 
+#                      log(rep_responder) + 
+#                      role_responder + 
+#                      #log(time_responder) + 
+#                      log(ques_responder) +
+#                      (1|responder) + (1|asker),
+#              data = csed_full_weighted,
+#              family = binomial
+#              )
+#saveRDS(p2_2d, "model-output/p2_2d.rds")
+p2_2d <- read_rds("model-output/p2_2d.rds")
+```
+
+```{r p2_2d_stats, include=FALSE}
+ranef2d <- p2_2d %>% ranef(., condVar=TRUE, drop=TRUE)
+ranef2d$responder <- ranef2d$responder %>% exp
+ranef2d$asker <- ranef2d$asker %>% exp
+se2d_responder <- {ranef2d$responder %>% sd} / {ranef2d$responder %>% length %>% sqrt}
+se2d_asker <- {ranef2d$asker %>% sd} / {ranef2d$asker %>% length %>% sqrt}
+
+p2_2d_responder <- c(se2d_responder, icc(p2_2d)[1]) %>% round(digits=4) %>% as.vector
+p2_2d_asker <- c(se2d_asker, icc(p2_2d)[2]) %>% round(digits=4) %>% as.vector
+p2_2d_info_criteria <- c(AIC(p2_2d), BIC(p2_2d)) %>% round(digits=4) %>% as.vector
+```
+
+```{r p2_2d_plots, include=FALSE}
+#sjPlot::tab_model(p2_2d, show.icc = TRUE)
+
+p2_2d_plots <- sjPlot::plot_model(p2_2d, type='re', sort.est=2, show.se=TRUE, show.legend=TRUE)
+
+p2_2d_plots[1]
+#ggsave("model-output/random_effects2d_responder.png", width = 1 * 10, height = 3 * 10)
+
+p2_2d_plots[2]
+#ggsave("model-output/random_effects2d_asker.png", width = 1 * 10, height = 3 * 10)
+```
+
+$p_2$ *Sender-Level Summary Table*
+
+Finally, we compiled the statistics from the null $p_2$ model and the three incremental stages of the sender level $p_2$ model (i.e., the ones that converged) and compiled them in a table for comparison (see below). We noted that the standard errors, AIC, and BIC all generally decreased as we iteratively added features to the models.
+
+```{r p2_sender_summary_table, include=TRUE, echo=FALSE}
+p2_sender_summary <- c(p2_0_responder, p2_0_asker, p2_0_info_criteria) %>% 
+        cbind(c(p2_2a_responder, p2_2a_asker, p2_2a_info_criteria)) %>% 
+        cbind(c(p2_2b_responder, p2_2b_asker, p2_2b_info_criteria)) %>% 
+        #cbind(c(p2_2c_responder, p2_2c_asker, p2_2c_info_criteria)) %>% 
+        cbind(c(p2_2d_responder, p2_2d_asker, p2_2d_info_criteria))
+colnames(p2_sender_summary) <- c("Null",
+                                 "Reputation",
+                                 "Role",
+                                 #"Time",
+                                 "Questions"
+                                 )
+rownames(p2_sender_summary) <- c("Responder SE", "Responder ICC", "Asker SE", "Asker ICC", "AIC", "BIC")
+p2_sender_summary
+```
+
+*Receiver Level* $p_2$ *Selection Model*
+
+We constructed a receiver level $p_2$ selection model for predicting ties by incrementally adding asker fixed effects related to (a) reputation, (b) time on the platform, and (c) questions answered in addition to the responder and asker random effects. However, the second model failed to converge and so we have not be included the askers' time on the CSEd SE in the results.
+
+```{r p2_3a, include=FALSE}
+#p2_3a <- glmer(tie ~ 1 + 
+#                       log(rep_asker) + 
+#                       (1|responder) + (1|asker),
+#              data = csed_full_weighted,
+#              family = binomial
+#              )
+#saveRDS(p2_3a, "model-output/p2_3a.rds")
+p2_3a <- read_rds("model-output/p2_3a.rds")
+```
+
+```{r p2_3a_stats, include=FALSE}
+ranef3a <- p2_3a %>% ranef(., condVar=TRUE, drop=TRUE)
+ranef3a$responder <- ranef3a$responder %>% exp
+ranef3a$asker <- ranef3a$asker %>% exp
+se3a_responder <- {ranef3a$responder %>% sd} / {ranef3a$responder %>% length %>% sqrt}
+se3a_asker <- {ranef3a$asker %>% sd} / {ranef3a$asker %>% length %>% sqrt}
+
+p2_3a_responder <- c(se3a_responder, icc(p2_3a)[1]) %>% round(digits=4) %>% as.vector
+p2_3a_asker <- c(se3a_asker, icc(p2_3a)[2]) %>% round(digits=4) %>% as.vector
+p2_3a_info_criteria <- c(AIC(p2_3a), BIC(p2_3a)) %>% round(digits=4) %>% as.vector
+```
+
+```{r p2_3a_plots, include=FALSE}
+#sjPlot::tab_model(p2_3a, show.icc = TRUE)
+
+p2_3a_plots <- sjPlot::plot_model(p2_3a, type='re', sort.est=2, show.se=TRUE, show.legend=TRUE)
+
+p2_3a_plots[1]
+#ggsave("model-output/random_effects3a_responder.png", width = 1 * 10, height = 3 * 10)
+
+p2_3a_plots[2]
+#ggsave("model-output/random_effects3a_asker.png", width = 1 * 10, height = 3 * 10)
+```
+
+```{r p2_3b, include=FALSE}
+## the second Receiver Level p2 Selection Model failed to converge
+## "Model failed to converge with max|grad| = 0.00110757 (tol = 0.001, component 1)"
+#p2_3b <- glmer(tie ~ 1 + 
+#                       log(rep_asker) + 
+#                       log(time_asker) + 
+#                       (1|responder) + (1|asker),
+#              data = csed_full_weighted,
+#              family = binomial
+#              )
+
+```
+
+```{r p2_3c, include=FALSE}
+#p2_3c <- glmer(tie ~ 1 + 
+#                       log(rep_asker) + 
+#                       #log(time_asker) + 
+#                       log(ques_asker) +
+#                       (1|responder) + (1|asker),
+#              data = csed_full_weighted,
+#              family = binomial
+#              )
+#saveRDS(p2_3c, "model-output/p2_3c.rds")
+p2_3c <- read_rds("model-output/p2_3c.rds")
+```
+
+```{r p2_3c_stats, include=FALSE}
+ranef3c <- p2_3c %>% ranef(., condVar=TRUE, drop=TRUE)
+ranef3c$responder <- ranef3c$responder %>% exp
+ranef3c$asker <- ranef3c$asker %>% exp
+se3c_responder <- {ranef3c$responder %>% sd} / {ranef3c$responder %>% length %>% sqrt}
+se3c_asker <- {ranef3c$asker %>% sd} / {ranef3c$asker %>% length %>% sqrt}
+
+p2_3c_responder <- c(se3c_responder, icc(p2_3c)[1]) %>% round(digits=4) %>% as.vector
+p2_3c_asker <- c(se3c_asker, icc(p2_3c)[2]) %>% round(digits=4) %>% as.vector
+p2_3c_info_criteria <- c(AIC(p2_3c), BIC(p2_3c)) %>% round(digits=4) %>% as.vector
+```
+
+```{r p2_3c_plots, include=FALSE}
+#sjPlot::tab_model(p2_3c, show.icc = TRUE)
+
+p2_3c_plots <- sjPlot::plot_model(p2_3c, type='re', sort.est=2, show.se=TRUE, show.legend=TRUE)
+
+p2_3c_plots[1]
+#ggsave("model-output/random_effects3c_responder.png", width = 1 * 10, height = 3 * 10)
+
+p2_3c_plots[2]
+#ggsave("model-output/random_effects3c_asker.png", width = 1 * 10, height = 3 * 10)
+```
+
+$p_2$ *Receiver-Level Summary Table*
+
+Finally, we compiled the statistics from the null $p_2$ model and the two incremental stages of the sender level $p_2$ model (i.e., the ones that converged) and compiled them in a table for comparison (see below). We noted that the standard errors, AIC, and BIC all generally decreased as we iteratively added features to the models.
+
+```{r p2_asker_summary_table, include=TRUE, echo=FALSE}
+p2_asker_summary <- c(p2_0_responder, p2_0_asker, p2_0_info_criteria) %>% 
+        cbind(c(p2_3a_responder, p2_3a_asker, p2_3a_info_criteria)) %>% 
+        #cbind(c(p2_2b_responder, p2_2b_asker, p2_2b_info_criteria)) %>% 
+        cbind(c(p2_3c_responder, p2_3c_asker, p2_3c_info_criteria))
+colnames(p2_asker_summary) <- c("Null",
+                                 "Reputation",
+                                 #"Time",
+                                 "Questions"
+                                 )
+rownames(p2_asker_summary) <- c("Responder SE", "Responder ICC", "Asker SE", "Asker ICC", "AIC", "BIC")
+p2_asker_summary
+```
+
+```{r p2_4, include=FALSE}
+## the full p2 model fails to converge
+## "Model failed to converge with max|grad| = 0.0172565 (tol = 0.001, component 1)"
+#p2_4 <- glmer(tie ~ 1 +
+#                      log(rep_responder) + 
+#                      role_responder + 
+#                      log(time_responder) + 
+#                      log(ques_responder) +
+#                      log(rep_asker) + 
+#                      log(time_asker) + 
+#                      log(ques_asker) +
+#                      (1|asker) + (1|responder),
+#              data = csed_full_weighted,
+#              family = binomial
+#              )
+#saveRDS(p2_4, "model-output/p2_4.rds")
+#p2_4 <- read_rds("model-output/p2_4.rds")
+```
+
+# Discussion
+
+The answers to our first research question revealed that there is a wide range in user characteristics of the members who participated in the 'core interactions' in CSEd SE. The highest 'degree' a user had was 142. The lowest was 1. The median (5) and mean (10) were low as well. This reveals that in the forum, there are only a few users who contribute to the most number of interactions of asking and answering questions. This trend is seen in many online discussion forums and social media sites. A comparison of these websites can possibly reveal which forums have a wider level (more users contributing to conversations as opposed to a few users contributing to most conversations) of interactions. Practitioners might find such information useful if directing teachers to various forums as a part of their professional development. It can also be useful from a 'forum development' point of view if certain forum characteristics are correlated with wider user interactions. 
+
+The answer to the second research question revealed that there indeed is clustering that happens in the forum. A content analysis of the user profiles and question characteristics will be helpful to find out the reasons for clustering. This information might be useful for teachers participating in these forums, in case they are in search for a specific group to interact with or learn from, be in terms of geographic location or topic area.
+
+The answers to the third research question will reveal the reasons for users to answer questions in the forum. In the past, only high repuatation points were seen predictive of users answering more questions. It will be interesting to find what other characteristics influence someone to answer questions in a forum. Further, 'lurking' is a common phenomenon that happens in online contexts and little is understood why people choose to not participate/answer questions. By finding why people _do_ participate and answer questions, we might be able to move a step towards undderstanding why people _do not_ participate or answer questions.
+
+## Future Research
+
+1. We anticipate adding variables to the selection model, such as users' geographical location, gender, and profession. With these additional variables, we should be able to construct a pair-level $p_2$. In order to find the gender and profession of individuals, we will have to conduct content analysis of the members in the forum. Not all members specify these traits, so we might have to conduct a survey in the forum.
+
+2. We will use KliqueFinder to cross-check the spinglass clusters derived in this current work. One of the biggest differences between the spinglass and Kliquefinder approaches is that spinglass uses addition to optimize for links/non-links between and within clusters, as mentioned earlier; Kliquefinder, on the other hand, uses a slightly different method for optimization, which we believe could be better suited for small networks. 
+
+3. We will find the focii of the clusters so that we can find out if the clusters are centered around users with high social capital, around certain topic areas, geography, or profession. 
+
+4. With additional clarity around clusers, we will add aesthetics to the network visualization, such as making the node size reflect the log() of a user's reputation score. 
+
+5. Finally, we will also use content analysis to explore the user characteristics of those who have a high in-degree and out-degree. 
+
+# References
+
+Bates, D., Maechler, M., Bolker, B., & Walker, S. (2018). lme4: Linear mixed-effects models using 'Eigen' and S4 (Version 1.1-19) [R package]. Retrieved from https://cran.r-project.org/package=lme4
+
+Brown, N. C. C., & Kolling, M. (2013, August). A tale of three sites: Resource and knowledge sharing amongst computer science educators. In _Proceedings of the ninth annual international ACM conference on International computing education research_ (pp. 27-34). ACM.
+
+Csardi, G. (2018). igraph: Network analysis and visualization (Version 1.2.2) [R package]. Retrieved from https://CRAN.R-project.org/package=igraph
+
+Ludecke, D. (2018). sjPlot: Data visualization for statistics in social science (Version 2.6.1) [R package]. Retrieved from https://cran.r-project.org/package=sjPlot
+
+Ludecke, D. (2018). sjstats: Collection of convenient functions for common statistical computations (Version 0.17.2) [R package]. Retrieved from https://cran.r-project.org/package=sjstats
+
+Macia, M., & Garcia, I. (2016). Informal online communities and networks as a source of teacher professional development: A review. _Teaching and Teacher Education, 55_, 291-307.
+
+Movshovitz-Attias, D., Movshovitz-Attias, Y., Steenkiste, P., & Faloutsos, C. (2013, August). Analysis of the reputation system and user contributions on a question answering website: Stackoverflow. In _Proceedings of the 2013 IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining_ (pp. 886-893). ACM.
+
+Ni, L., Guzdial, M., Tew, A. E., Morrison, B., & Galanos, R. (2011, March). Building a community to support HS CS teachers: the disciplinary commons for computing educators. In _Proceedings of the 42nd ACM technical symposium on Computer science education_ (pp. 553-558). ACM.
+
+Pedersen, T. L. (2018). ggraph: An implementation of grammar of graphics for graphs and networks (Version 1.0.2) [R package]. Retrieved from https://CRAN.R-project.org/package=ggraph
+
+R Core Team. (2018). R: A language and environment for statistical computing (Version 3.5.0) [Computer software]. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from https://www.R-project.org/
+
+Reichardt, J., & Bornholdt, S. (2006). Statistical mechanics of community detection. _Physical Review E, 74_(1), 016110.
+
+Robinson, D. (2015). stackr: An R package for connecting to the Stack Exchange API [R package]. Retrieved from https://github.com/dgrtwo/stackr 
+
+Trust, T., Krutka, D. G., & Carpenter, J. P. (2016). ???Together we are better???: Professional learning networks for teachers. _Computers & education, 102,_ 15-34.
+
+Wenger, E. (1998). _Communities of practice: Learning, meaning, and identity._ New York, NY: Cambridge University Press.
+
+Wenger, E. (2011). _Communities of practice: A brief introduction._
+
+Wickham, H., Chang, W., & RStudio. (2016). ggplot2: Create elegant data visualisations using the grammar of graphics (Version 2.2.1) [R package]. Retrieved from https://CRAN.R-project.org/package=ggplot2
+
+Wickham, H., Francois, R., Henry, L., Muller, K., & RStudio. (2018). dplyr: A grammar of data manipulation (Version 0.7.6) [R package]. Retrieved from https://CRAN.R-project.org/package=dplyr
+
+Yadav, A., Gretter, S., Hambrusch, S., & Sands, P. (2016). Expanding computer science education in schools: understanding teacher experiences and challenges. _Computer Science Education, 26_(4), 235-254.
