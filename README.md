@@ -9,6 +9,8 @@ Tuesday, 10/22, 1:00pm
 - [Bret Staudt Willet](http://bretsw.com/), Michigan State University
 - [Sukanya Moudgalya](https://sukanyakm.wordpress.com/), Michigan State University
 
+**Presentation slides: https://bretsw.github.io/csed-se-slides/**
+
 ## Description
 
 This presentation describes computer science (CS) educators’ inspired professional learning in the Computer Science Educators Stack Exchange (CSEd SE) online forum. Researchers have used metaphors of community, network, and space to conceptualize professional learning; here these frameworks were considered through the CSEd SE case. Social network analysis and content analysis were used to analyze questions and responses in CSEd SE; the affinity spaces framework was deemed most appropriate for initial studies of online professional learning.
