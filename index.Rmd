@@ -39,7 +39,7 @@ https://bretsw.github.io/csed-se-slides/
 
 ---
 
-# Singletons
+# Problem
 
 - Computer Science teacher singletons (Yadav, Gretter, Hambrush, & Sands, 2017)
 - Sparse face-to-face networks for computing resources (Mazur & Woodland, 2018)
