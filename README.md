@@ -6,8 +6,8 @@ This is a repository for:
 at AECT's Annual International Convention in Las Vegas, NV  
 Tuesday, 10/22/2019, 1:00pm
 
-- [Bret Staudt Willet](http://bretsw.com/), Michigan State University
-- [Sukanya Moudgalya](https://sukanyakm.wordpress.com/), Michigan State University
+- [K. Bret Staudt Willet](http://bretsw.com/), Michigan State University
+- [Sukanya K. Moudgalya](https://sukanyakm.wordpress.com/), Michigan State University
 
 **Presentation slides: https://bretsw.github.io/csed-se-slides/**
 

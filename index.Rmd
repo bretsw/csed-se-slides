@@ -44,7 +44,7 @@ https://bretsw.github.io/csed-se-slides/
 - Computer Science teacher singletons (Yadav, Gretter, Hambrush, & Sands, 2017)
 - Sparse face-to-face networks for computing resources (Mazur & Woodland, 2018)
 
-```{r, out.width = "720px", echo = FALSE, fig.align = "center"}
+```{r, out.width = "600px", echo = FALSE, fig.align = "center"}
 include_graphics("img/singleton.jpg")
 ```
 
@@ -54,7 +54,7 @@ include_graphics("img/singleton.jpg")
 
 - Seeking help online  (Hur & Brush, 2009)
 
-```{r, out.width = "720px", echo = FALSE, fig.align = "center"}
+```{r, out.width = "600px", echo = FALSE, fig.align = "center"}
 include_graphics("img/help.jpg")
 ```
 
@@ -147,13 +147,21 @@ with the frameworks of communities, networks, and spaces in mind.
 
 # Research Questions
 
-1. How are CSEd SE contributors using the forum?
-1. What are the characteristics of CSEd SE's highly-connected contributors?
-1. Do CSEd SE's highly-connected contributors tend to interact with some fellow contributors more than others?
-
-```{r, out.width = "720px", echo = FALSE, fig.align = "center"}
+```{r, out.width = "480px", echo = FALSE, fig.align = "center"}
 include_graphics("img/question.jpg")
 ```
+
+--
+
+1. How are CSEd SE contributors using the forum?
+
+--
+
+1. What are the characteristics of CSEd SE's highly-connected contributors?
+
+--
+
+1. Do CSEd SE's highly-connected contributors tend to interact with some fellow contributors more than others?
 
 ---
 
@@ -167,7 +175,12 @@ class: inverse, center, middle
 
 ### RQ1. How are CSEd SE contributors using the forum?
 
-*May 2017 - June 2018*:
+--
+
+**May 2017 - June 2018**
+
+--
+
 - 559 questions from 210 users
 
 --
@@ -179,6 +192,8 @@ class: inverse, center, middle
 # Results
 
 ### RQ2. What are the characteristics of CSEd SE's highly-connected contributors?
+
+--
 
 *highly-connected contributors* = at least 3 interactions with fellow users
 
@@ -214,13 +229,21 @@ knitr::kable(stats_summary, format = "html")
 
 ### RQ3. Do CSEd SE's highly-connected contributors tend to interact with some fellow contributors more than others?
 
-*Spinglass clustering algorithm*:
-- Internal links and external non-links: YES! 
-- External links and internal non-links: NO!
+--
+
+**Spinglass clustering algorithm**
 
 ```{r, out.width = "480px", echo = FALSE, fig.align = "center"}
 include_graphics("img/spinner.jpg")
 ```
+
+--
+
+- Internal links and external non-links: YES! 
+
+--
+
+- External links and internal non-links: NO!
 
 ---
 
@@ -238,21 +261,60 @@ include_graphics("img/csed-graph-forced-atlas8.png")
 
 ### RQ3. Do CSEd SE's highly-connected contributors tend to interact with some fellow contributors more than others?
 
-*Results of quantitative analysis*: 
-- statistically significant evidence of clustering
-- 8 clusters (2 very small)
-- 6 larger cluster ranged in size from 23 to 53 members
+--
+
+**Results of quantitative analysis**
 
 --
 
-*Results of qualitative coding the 6 larger clusters*:  
-- each contained at least some questions and answers related to lesson ideas and curriculum design
+- statistically significant evidence of clustering
+
+--
+
+- 8 clusters (2 very small)
+
+--
+
+- 6 larger cluster ranged in size from 23 to 53 members
+
+---
+
+# Results
+
+### RQ3. Do CSEd SE's highly-connected contributors tend to interact with some fellow contributors more than others?
+
+--
+
+**Results of qualitative coding the 6 larger clusters**
+
+--
+
+- each cluster contained at least some questions and answers related to lesson ideas and curriculum design
+
+--
+
 - various topics:
-  1. teaching high school students, 
+
+  1. teaching high school students
+  
+--
+
   1. teaching undergraduates
+  
+--
+
   1. labs
+  
+--
+
   1. web development
+  
+--
+
   1. best practices
+  
+--
+
   1. student motivation
 
 ---
@@ -280,33 +342,49 @@ include_graphics("img/mess.jpg")
 
 ### Community
 
+```{r, out.width = "360px", echo = FALSE, fig.align = "center"}
+include_graphics("img/community.jpg")
+```
+
+--
+
 - democratic participation qualities
+
+--
+
   - elected moderators
   - upvoting and downvoting questions and answers
   - user-generated question-and-answer tags
-  - cluster topics not being dictated by the most active contributors
 
-*Can communities exist in online discussion forums?*
+--
 
-```{r, out.width = "480px", echo = FALSE, fig.align = "center"}
-include_graphics("img/community.jpg")
-```
+**Can communities exist in online discussion forums?**
 
 ---
 
 # Significance
 
 ### Network
-- participation inequality
-- diversity in participation even among highly-connected contributors
-- overlap and interconnection of clusters
-- diversity in terms of professions and locations of the members
 
-*What are different ways of identifying "experts" in online discussion forums?*
-
-```{r, out.width = "480px", echo = FALSE, fig.align = "center"}
+```{r, out.width = "360px", echo = FALSE, fig.align = "center"}
 include_graphics("img/network.jpg")
 ```
+
+--
+
+- participation inequality
+
+--
+
+- overlap and interconnection of clusters
+
+--
+
+- diversity in terms of professions and locations of the members
+
+--
+
+**What are different ways of identifying "experts" in online discussion forums?**
 
 ---
 
@@ -314,10 +392,14 @@ include_graphics("img/network.jpg")
 
 ### Space
 
+--
+
 > For some purposes, it may be easier to draw the boundaries of the United States as a geographical space on a map and then look at how different sorts of people use that space, i.e., what they do there and what they get from that space (e.g., import and export from it). In the case of Johnny and Janie in the science class, the two students are taking quite different things from the space.
 >  - James Paul Gee, *Good Video Games + Good Learning* (2nd edition, p. 89)
 
-```{r, out.width = "480px", echo = FALSE, fig.align = "center"}
+--
+
+```{r, out.width = "360px", echo = FALSE, fig.align = "center"}
 include_graphics("img/united-states.jpg")
 ```
 
@@ -327,11 +409,13 @@ include_graphics("img/united-states.jpg")
 
 ### Space
 
-*How do people use the space? How does this change over time?*
-
 ```{r, out.width = "600px", echo = FALSE, fig.align = "center"}
 include_graphics("img/space.jpg")
 ```
+
+--
+
+**How do people use the space? How does this change over time?**
 
 ---
 
